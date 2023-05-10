@@ -17,6 +17,9 @@ let tree = newTree(testData);
 
 prettyPrint(tree.root);
 
+tree.insert(2);
+prettyPrint(tree.root);
+
 function newTree(array) {
 	let sortedArray = [...array].sort((a, b) => a - b);
 	let uniqueArray = [...new Set(sortedArray)];	// remove duplicates
@@ -40,8 +43,30 @@ function newTree(array) {
 		return node;
 	}
 
+	function insert(data, root = this.root) {
+		if (data < root.data && root.left === null) {
+			root.left = newNode(data);
+			return;
+		}
+
+		if (data > root.data && root.right === null) {
+			root.right = newNode(data);
+			return;
+		}
+
+		if (data < root.data) {
+			insert(data, root.left);
+		}
+
+		if (data > root.data) {
+			insert(data, root.right);
+		}
+		
+	}
+
 	return {
 		buildTree,
+		insert,
 
 		get root() {
 			return root;
