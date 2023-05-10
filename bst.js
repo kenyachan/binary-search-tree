@@ -3,7 +3,7 @@ const testData = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 let tree = newTree(testData);
 
 tree.prettyPrint();
-tree.insert(2);
+tree.insert(4);
 tree.prettyPrint();
 
 function newTree(array) {
@@ -47,7 +47,6 @@ function newTree(array) {
 		if (data > root.data) {
 			insert(data, root.right);
 		}
-		
 	}
 
 	function prettyPrint(node = this.root, prefix = '', isLeft = true) {
