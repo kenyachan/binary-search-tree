@@ -1,24 +1,10 @@
-const prettyPrint = (node, prefix = '', isLeft = true) => {
-  if (node === null) {
-     return;
-  }
-  if (node.right !== null) {
-    prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
-  }
-  console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
-  if (node.left !== null) {
-    prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
-  }
-}
-
 const testData = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 
 let tree = newTree(testData);
 
-prettyPrint(tree.root);
-
+tree.prettyPrint();
 tree.insert(2);
-prettyPrint(tree.root);
+tree.prettyPrint();
 
 function newTree(array) {
 	let sortedArray = [...array].sort((a, b) => a - b);
@@ -64,9 +50,28 @@ function newTree(array) {
 		
 	}
 
+	function prettyPrint(node = this.root, prefix = '', isLeft = true) {
+		if (node === null) {
+			return;
+		}
+
+		if (node.right !== null) {
+			prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+		}
+
+		console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+
+		if (node.left !== null) {
+			prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+		}
+	}
+
+
 	return {
 		buildTree,
 		insert,
+
+		prettyPrint,
 
 		get root() {
 			return root;
