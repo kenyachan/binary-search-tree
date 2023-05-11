@@ -98,6 +98,11 @@ function newNode(data) {
 		get right() {
 			return right;
 		},
+
+		get isLeaf() {
+			return (this.left === null && this.right === null) ?
+				true : false;
+		},
 		
 		set left(node) {
 			left = node;
