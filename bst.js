@@ -20,7 +20,7 @@ function newTree(array) {
 
 		let leftArray = array.splice(0, midIndex);
 		let rightArray = array.splice(1, array.length - 1);
-		let node = newNode(array);
+		let node = newNode(array[0]);
 
 		node.left = buildTree(leftArray) || null;
 		node.right = buildTree(rightArray) || null;
