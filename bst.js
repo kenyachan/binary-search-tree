@@ -49,6 +49,37 @@ function newTree(array) {
 		}
 	}
 
+	function remove(data, root = this.root) {
+		if (root === null) return root;
+
+		// Traverse the tree
+		if (data < root.data) {
+			root.left = remove(data, root.left);
+		} else if (data > root.data) {
+			root.right = remove(data, root.right);
+		} else {
+			// data match found
+			if (root.left === null)
+				return root.right;
+
+			if (root.right === null)
+				return root.left;
+
+			// Replace with smallest value
+			root.data = inOrderSuccessor(root.right);;
+			root.right = remove(root.data, root.right);
+		}
+
+		return root;
+	}
+
+	function inOrderSuccessor(node) {
+		if (node.left === null)
+			return node.data;
+
+		return inOrderSuccessor(node.left);
+	}
+
 	function prettyPrint(node = this.root, prefix = '', isLeft = true) {
 		if (node === null) {
 			return;
@@ -65,10 +96,10 @@ function newTree(array) {
 		}
 	}
 
-
 	return {
 		buildTree,
 		insert,
+		remove,
 
 		prettyPrint,
 
@@ -102,6 +133,10 @@ function newNode(data) {
 		get isLeaf() {
 			return (this.left === null && this.right === null) ?
 				true : false;
+		},
+
+		set data(value) {
+			data = value;
 		},
 		
 		set left(node) {
