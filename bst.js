@@ -13,7 +13,6 @@ function newTree(array) {
 
 	function buildTree(array) {
 		if (array.length === 0) return null;
-		if (array.length === 1) return newNode(array[0]);
 
 		let midIndex = array.length % 2 === 0 ?
 			(array.length / 2) - 1:
