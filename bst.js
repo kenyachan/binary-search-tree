@@ -29,23 +29,16 @@ function newTree(array) {
 	}
 
 	function insert(data, root = this.root) {
-		if (data < root.data && root.left === null) {
-			root.left = newNode(data);
-			return;
-		}
+		if (root === null)
+			return newNode(data);
 
-		if (data > root.data && root.right === null) {
-			root.right = newNode(data);
-			return;
-		}
+		if (data < root.data)
+			root.left = insert(data, root.left);
 
-		if (data < root.data) {
-			insert(data, root.left);
-		}
+		if (data > root.data)
+			root.right = insert(data, root.right);
 
-		if (data > root.data) {
-			insert(data, root.right);
-		}
+		return root;
 	}
 
 	function remove(data, root = this.root) {
