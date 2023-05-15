@@ -84,6 +84,29 @@ function newTree(array) {
 		return root;
 	}
 
+	function levelOrder(callback) {
+		let discoveredNodes = root !== null ? [root] : [];
+		let visitedNodes = [];
+
+		while (discoveredNodes.length > 0) {
+			discoveredNode = discoveredNodes.shift();
+
+			if (callback !== undefined)
+				callback(discoveredNode.data);
+
+			visitedNodes.push(discoveredNode.data);
+
+			if (discoveredNode.left !== null)
+				discoveredNodes.push(discoveredNode.left);
+
+			if (discoveredNode.right !== null)
+				discoveredNodes.push(discoveredNode.right);
+		}
+
+		if (callback === undefined)
+			return visitedNodes;
+	}
+
 	function prettyPrint(node = this.root, prefix = '', isLeft = true) {
 		if (node === null) {
 			return;
@@ -105,6 +128,7 @@ function newTree(array) {
 		insert,
 		remove,
 		find,
+		levelOrder,
 
 		prettyPrint,
 
