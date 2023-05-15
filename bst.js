@@ -107,6 +107,21 @@ function newTree(array) {
 			return visitedNodes;
 	}
 
+	function preOrder(callback, root = this.root) {
+		let discoveredNodes = [root.data];
+
+		if (callback !== undefined)
+			callback(root.data);
+
+		if (root.left !== null)
+			discoveredNodes = discoveredNodes.concat(preOrder(callback, root.left));
+
+		if (root.right !== null)
+			discoveredNodes = discoveredNodes.concat(preOrder(callback, root.right));
+
+		return discoveredNodes;
+	}
+
 	function prettyPrint(node = this.root, prefix = '', isLeft = true) {
 		if (node === null) {
 			return;
@@ -129,6 +144,7 @@ function newTree(array) {
 		remove,
 		find,
 		levelOrder,
+		preOrder,
 
 		prettyPrint,
 
