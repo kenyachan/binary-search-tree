@@ -172,6 +172,18 @@ function newTree(array) {
 		}
 	}
 
+	function treeHeight(root = this.root) {
+		if (root === null) return 0;
+
+		let leftHeight = treeHeight(root.left);
+		let rightHeight = treeHeight(root.right);
+
+		if (leftHeight >= rightHeight)
+			return leftHeight + 1;
+		else
+			return rightHeight + 1;
+	}
+
 	return {
 		buildTree,
 		insert,
@@ -191,6 +203,10 @@ function newTree(array) {
 		set root(node) {
 			root = node;
 		},
+
+		get height() {
+			return treeHeight(this.root);
+		}
 	}
 }
 
