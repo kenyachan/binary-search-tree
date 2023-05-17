@@ -184,6 +184,14 @@ function newTree(array) {
 			return rightHeight + 1;
 	}
 
+	function depth(value, root = this.root) {
+		if (root.data === value) return 1;
+
+		return value < root.data ?
+			depth(value, root.left) + 1 :
+			depth(value, root.right) + 1;
+	}
+
 	return {
 		buildTree,
 		insert,
@@ -193,6 +201,7 @@ function newTree(array) {
 		preOrder,
 		inOrder,
 		postOrder,
+		depth,
 
 		prettyPrint,
 
