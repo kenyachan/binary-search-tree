@@ -192,6 +192,19 @@ function newTree(array) {
 			depth(value, root.right) + 1;
 	}
 
+	function checkBalance(root = this.root) {
+		if (root === null)
+			return true;
+
+		let heightDifference = Math.abs(treeHeight(root.left) - treeHeight(root.right));
+
+		if (heightDifference <= 1 && 
+			checkBalance(root.left) === true &&
+			checkBalance(root.right) === true)
+			return true;
+		return false;
+	}
+
 	return {
 		buildTree,
 		insert,
@@ -215,6 +228,10 @@ function newTree(array) {
 
 		get height() {
 			return treeHeight(this.root);
+		},
+
+		get isBalanced() {
+			return checkBalance(this.root);
 		}
 	}
 }
