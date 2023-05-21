@@ -28,17 +28,21 @@ function newTree(array) {
 		return node;
 	}
 
-	function insert(data, root = this.root) {
+	function _insert(data, root = this.root) {
 		if (root === null)
 			return newNode(data);
 
 		if (data < root.data)
-			root.left = insert(data, root.left);
+			root.left = _insert(data, root.left);
 
 		if (data > root.data)
-			root.right = insert(data, root.right);
+			root.right = _insert(data, root.right);
 
 		return root;
+	}
+
+	function insert(data) {
+		return _insert(data, this.root);
 	}
 
 	function remove(data, root = this.root) {
