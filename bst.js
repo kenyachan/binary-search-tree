@@ -45,14 +45,14 @@ function newTree(array) {
 		return _insert(data, this.root);
 	}
 
-	function remove(data, root = this.root) {
+	function _remove(data, root = this.root) {
 		if (root === null) return root;
 
 		// Traverse the tree
 		if (data < root.data) {
-			root.left = remove(data, root.left);
+			root.left = _remove(data, root.left);
 		} else if (data > root.data) {
-			root.right = remove(data, root.right);
+			root.right = _remove(data, root.right);
 		} else {
 			// data match found
 			if (root.left === null)
@@ -63,10 +63,14 @@ function newTree(array) {
 
 			// Replace with smallest value
 			root.data = inOrderSuccessor(root.right);;
-			root.right = remove(root.data, root.right);
+			root.right = _remove(root.data, root.right);
 		}
 
 		return root;
+	}
+
+	function remove(data) {
+		return _remove(data, this.root);
 	}
 
 	function inOrderSuccessor(node) {
