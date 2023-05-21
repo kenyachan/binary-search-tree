@@ -233,6 +233,12 @@ function newTree(array) {
 		return false;
 	}
 
+	function rebalance() {
+		let inOrderArray = this.inOrder();
+
+		this.root = buildTree(inOrderArray);
+	}
+
 	return {
 		buildTree,
 		insert,
@@ -243,6 +249,7 @@ function newTree(array) {
 		inOrder,
 		postOrder,
 		depth,
+		rebalance,
 
 		prettyPrint,
 
