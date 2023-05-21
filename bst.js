@@ -119,19 +119,23 @@ function newTree(array) {
 			return visitedNodes;
 	}
 
-	function preOrder(callback, root = this.root) {
+	function _preOrder(callback, root = this.root) {
 		let discoveredNodes = [root.data];
 
 		if (callback !== undefined)
 			callback(root.data);
 
 		if (root.left !== null)
-			discoveredNodes = discoveredNodes.concat(preOrder(callback, root.left));
+			discoveredNodes = discoveredNodes.concat(_preOrder(callback, root.left));
 
 		if (root.right !== null)
-			discoveredNodes = discoveredNodes.concat(preOrder(callback, root.right));
+			discoveredNodes = discoveredNodes.concat(_preOrder(callback, root.right));
 
 		return discoveredNodes;
+	}
+
+	function preOrder(callback) {
+		return _preOrder(callback, this.root);
 	}
 
 	function inOrder(callback, root = this.root) {
