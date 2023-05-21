@@ -159,14 +159,14 @@ function newTree(array) {
 		return _inOrder(callback, this.root);
 	}
 
-	function postOrder(callback, root = this.root) {
+	function _postOrder(callback, root = this.root) {
 		let discoveredNodes = [];
 
 		if (root.left !== null)
-			discoveredNodes = discoveredNodes.concat(postOrder(callback, root.left));
+			discoveredNodes = discoveredNodes.concat(_postOrder(callback, root.left));
 
 		if (root.right !== null)
-			discoveredNodes = discoveredNodes.concat(postOrder(callback, root.right));
+			discoveredNodes = discoveredNodes.concat(_postOrder(callback, root.right));
 
 		discoveredNodes.push(root.data);
 
@@ -174,6 +174,10 @@ function newTree(array) {
 			callback(root.data);
 
 		return discoveredNodes;
+	}
+
+	function postOrder(callback) {
+		return _postOrder(callback, this.root);
 	}
 
 	function prettyPrint(node = this.root, prefix = '', isLeft = true) {
