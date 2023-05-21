@@ -80,16 +80,20 @@ function newTree(array) {
 		return inOrderSuccessor(node.left);
 	}
 
-	function find(value, root = this.root) {
+	function _find(value, root = this.root) {
 		if (root === null) return null;
 
 		if (value < root.data)
-			return find(value, root.left);
-			
+			return _find(value, root.left);
+
 		if (value > root.data)
-			return find(value, root.right);
+			return _find(value, root.right);
 		
 		return root;
+	}
+
+	function find(value) {
+		return _find(value, this.root);
 	}
 
 	function levelOrder(callback) {
