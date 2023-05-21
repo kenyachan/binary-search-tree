@@ -1,10 +1,5 @@
 const testData = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-
-let tree = newTree(testData);
-
-tree.prettyPrint();
-tree.insert(4);
-tree.prettyPrint();
+const testData2 = [4, 5, 8 ,10, 15, 20 ,25];
 
 function newTree(array) {
 	let sortedArray = [...array].sort((a, b) => a - b);
