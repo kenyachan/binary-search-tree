@@ -302,4 +302,76 @@ function newNode(data) {
 	}
 }
 
+function newRandomArray() {
+	let arr = [];
 
+	let numberOfItems = Math.round(Math.random() * 100);
+	
+	for (let i = 0; i < numberOfItems; i++) {
+		arr.push(Math.round(Math.random() * 100));
+	}
+
+	return arr;
+}
+
+function driverScript() {
+	// 1. Create a binary search tree from an array of random numbers.
+	let array = newRandomArray();
+
+	let tree = newTree(array);
+	console.log(`New tree created with array: ${array}`);
+	tree.prettyPrint();
+	
+	// 2. Confirm the tree is balanced
+	console.log(`Tree isBalanced = ${tree.isBalanced}`);
+
+	// 3. Print out all elements in level, pre, post and in order
+	printTree(tree);
+	
+	// 4. Unbalance the tree
+	console.log('Unbalancing tree...');
+	tree.insert(100);
+	tree.insert(101);
+	tree.insert(102);
+	tree.insert(103);
+	tree.insert(104);
+	tree.prettyPrint();
+
+	// 5. Confirm tree is unbalanced
+	console.log(`Tree isBalanced = ${tree.isBalanced}`);
+
+	// 6. Rebalance the tree
+	console.log('Rebalancing tree...');
+	tree.rebalance();
+	tree.prettyPrint();
+
+	// 7. Confirm tree is rebalanced
+	console.log(`Tree isBalanced = ${tree.isBalanced}`);
+
+	// 8. Print out all elements in level, pre, post and in order
+	printTree(tree);
+}
+
+driverScript();
+
+function printTree(tree) {
+	let levelOrderArr = [];
+	console.log('Level Order:');
+	tree.levelOrder(x => levelOrderArr.push(x));
+	console.log(levelOrderArr);
+
+	let preOrderArr = [];
+	console.log('PreOrder:');
+	tree.preOrder(x => preOrderArr.push(x));
+	console.log(preOrderArr);
+
+	let postOrderArr = [];
+	console.log('PostOrder:');
+	tree.postOrder(x => postOrderArr.push(x));
+	console.log(postOrderArr);
+
+	let inOrderArr = [];
+	console.log('InOrder:');
+	tree.inOrder(x => inOrderArr.push(x));
+	console.log(inOrderArr);
+}
