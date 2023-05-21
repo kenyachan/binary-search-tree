@@ -208,12 +208,16 @@ function newTree(array) {
 			return rightHeight + 1;
 	}
 
-	function depth(value, root = this.root) {
+	function _depth(value, root = this.root) {
 		if (root.data === value) return 1;
 
 		return value < root.data ?
-			depth(value, root.left) + 1 :
-			depth(value, root.right) + 1;
+			_depth(value, root.left) + 1 :
+			_depth(value, root.right) + 1;
+	}
+
+	function depth(value) {
+		return _depth(value, this.root);
 	}
 
 	function checkBalance(root = this.root) {
